@@ -1,0 +1,16 @@
+webpuck (import\export)
+    babel
+    sass
+    eslint
+    2 modes
+        - Dev
+            dev server
+            hot reload
+            sourceMap - истодные карты для стилей
+            eslint
+            not minfied js & css
+        - Prod
+            minified code
+
+Git
+
