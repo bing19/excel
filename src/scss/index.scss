@@ -1,9 +1,33 @@
+@import "~normalize.css";
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@300;400;500;600;700;800;900&display=swap');
+
+@import "header";
+@import "toolbar";
+@import "formula";
+@import "table";
+@import "dashboard";
+ 
 $red: rgb(247, 229, 251);
 $h1: rgb(136, 25, 161);
 
-body {
-    background: $red;
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
 }
 
+body {
+    font-family: 'Roboto', sans-serif;
+    font-size: 12px;
+    // background: $red;
+}
+
+.excel {
+    position: relative;
+    color: #888;
+    height: 100%;
+    max-width: 100%;
+    // font-size: .8em;
+}
 h1 {color: $h1;}
 
