@@ -12,6 +12,9 @@
         "comma-dangle": "off",
         "require-jsdoc": "off",
         "eol-last": "off",
+        "no-trailing-spaces":"off",
+        "indent":"off",
+        "operator-linebreak":"off",
     },
     "extends": ["eslint:recommended", "google"]
 }
