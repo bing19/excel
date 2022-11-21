@@ -3,19 +3,27 @@ const CODES = {
     Z: 90
 }
 
-function createRow(content, numRow) {
-    return `<div class="row">
-                <div class="row-info">${numRow ?? '' }</div>
+function createRow(content, index) {
+    const resizer = (index) ? `<div class="row-resize" 
+                                    data-resize="row"></div>` : ''
+    return `<div class="row" data-type="resizable">
+                <div class="row-info">
+                    ${index ?? '' }
+                    ${resizer}
+                </div>
                 <div class="row-data">${content}</div>
             </div>`
 }
 
-function toColumn(column) {
-    return `<div class="column">${column}</div>`
+function toColumn(column, index) {
+    return `<div class="column" data-type="resizable" data-col="${index}">
+                ${column}
+                <div class="col-resize" data-resize="col"></div>
+            </div>`
 }
 
 function toCell(char, i) {
-    return `<div class="cell" contenteditable></div>`
+    return `<div class="cell" data-col="${i}" contenteditable></div>`
 }
 
 const toChar = (_, i) => String.fromCharCode(CODES.A + i)
