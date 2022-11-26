@@ -1,9 +1,11 @@
 import {$} from '@/core/Dom'
+import {Emitter} from '../../core/Emitter'
 
 export class Excel {
   constructor(seletor, options) {
     this.$el = $(seletor)
     this.components = options.components || []
+    this.emitter = new Emitter()
   }
 
   getRoot() {
@@ -11,7 +13,11 @@ export class Excel {
 
     this.components = this.components.map(Component => {
       const $el = $.create('div', Component.className)
-      const component = new Component($el)
+
+      const componentOptions = {emitter: this.emitter}
+
+      const component = new Component($el, componentOptions)
+
       // DEBUG
       window['c' + component.name] = component
       // console.log('Raw', component)
@@ -28,6 +34,12 @@ export class Excel {
 
     this.components.forEach(component => {
       component.init()
+    })
+  }
+
+  destroy() {
+    this.components.forEach(component => {
+      component.destory()
     })
   }
 }
