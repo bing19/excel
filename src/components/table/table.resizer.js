@@ -1,7 +1,8 @@
 import {$} from '@core/Dom'
 
 export function resizerHandler($root, event) {
-    const $resizer = $(event.target)
+    return new Promise(resolve => {
+        const $resizer = $(event.target)
     // Плохая реализация, связвность верстки и кода
     // const $parent = $resizer.$el.parentNode
     const type = $resizer.data.resize
@@ -41,7 +42,19 @@ export function resizerHandler($root, event) {
             })
         } else {
             $parent.css({'height': value + 'px'})
+            $root.findAll(
+                `[data-row="${$parent.data.row}"]`
+                ).forEach(el => {
+                    console.log(el)
+                $(el).css({'height': value + 'px'})
+            })
         }
+
+        resolve({
+            value,
+            type,
+            id: $parent.data[type]
+        })
 
         $resizer.css({
             opacity: 0,
@@ -49,4 +62,5 @@ export function resizerHandler($root, event) {
             right: 0,
         })
     }
+    })
 }
