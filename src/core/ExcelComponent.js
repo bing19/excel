@@ -5,9 +5,13 @@ export class ExcelComponent extends DomListener {
     super($root, options.listeners)
     this.name = options.name || ''
     this.emitter = options.emitter
+    this.subcribe = options.subcribe || []
     this.prepare()
 
+    this.store = options.store
+
     this.unsubs = []
+    // this.storeSub = null
   }
 
   // Настраивает компонент до init
@@ -33,10 +37,33 @@ export class ExcelComponent extends DomListener {
     this.emitter.emit(event, ...args)
   }
 
+  $dispatch(action) {
+    this.store.dispatch(action)
+  }
+
+  // $subcribe(fn) {
+  //   this.storeSub = this.store.subcribe(fn)
+  // }
+
+  $getState() {
+    return this.store.getState()
+  }
+
+  // Сюда приходят изминения на те поля на которые мы подписались
+  storeChanged(changes) {
+    console.log('Parent Change')
+  }
+
+  isWatching(key) {
+    return this.subcribe.includes(key)
+  }
+
+
   // Удаляем компонент
   // Удаляем слушателей
   destroy() {
     this.removeDOMListeners()
     this.unsubs.forEach( unsub => unsub())
+    // this.storeSub.unsubcribe()
   }
 }
