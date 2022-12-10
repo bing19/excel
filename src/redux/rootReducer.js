@@ -1,4 +1,5 @@
-import {CHANGE_TEXT, TABLE_RESIZE, CHANGE_TITLE, CHANGE_STYLES, APPLY_STYLE} from '@/redux/types'
+import {CHANGE_TEXT, TABLE_RESIZE, CHANGE_TITLE, CHANGE_STYLES, APPLY_STYLE, UPDATE_DATE} from '@/redux/types'
+import {getCurrentDate} from '@core/utils'
 
 export function rootReducer(state, action) {
     let field
@@ -27,6 +28,8 @@ export function rootReducer(state, action) {
                 [field]: prevState,
                 currentStyles: {...state.currentStyles, ...action.data.value}
             }
+        case UPDATE_DATE:
+            return {...state, createAt: getCurrentDate()}
         default:
             return state
     }

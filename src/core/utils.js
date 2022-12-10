@@ -45,3 +45,12 @@ export function debounce(fn, wait) {
         timeout = setTimeout(later, wait)
     }
 }
+
+export function getCurrentDate() {
+    const date = new Date()
+    return `${date.getDate()}.${date.getMonth()}.${date.getFullYear()} ${date.getHours()}:${date.getMinutes()}`
+}
+
+export function storeName(params) {
+    return `Excel:${params}`
+}

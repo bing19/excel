@@ -10,9 +10,11 @@ export class Store {
 
     subcribe(fn) {
         this.listeners.push(fn)
+        const self = this
         return {
             unsubcribe() {
-                this.listeners = this.listeners
+                console.log('Listeners', self)
+                self.listeners = self.listeners
                 .filter(listener => listener !== fn)
             }
         }
