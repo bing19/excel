@@ -1,10 +1,11 @@
 import {$} from '@/core/Dom'
 import {Emitter} from '../../core/Emitter'
 import {StoreSubcriber} from '@core/StoreSubcriber'
+import * as actions from '@redux/actions'
 
 export class Excel {
-  constructor(seletor, options) {
-    this.$el = $(seletor)
+  constructor(options) {
+    // this.$el = $(seletor)
     this.components = options.components || []
     this.emitter = new Emitter()
     this.store = options.store
@@ -20,7 +21,7 @@ export class Excel {
       const component = new Component($el, componentOptions)
 
       // DEBUG
-      window['c' + component.name] = component
+      // window['c' + component.name] = component
 
       $el.html(component.toHTML())
       $root.append($el)
@@ -30,9 +31,9 @@ export class Excel {
     return $root
   }
 
-  render() {
-    this.$el.append(this.getRoot())
-
+  init() {
+    // this.$el.append(this.getRoot())
+    this.store.dispatch(actions.updateDate())
     this.subcriber.subcribeComponents(this.components)
     this.components.forEach(component => {
       component.init()
@@ -42,7 +43,7 @@ export class Excel {
   destroy() {
     this.subcriber.unsubcribeStoreAll()
     this.components.forEach(component => {
-      component.destory()
+      component.destroy()
     })
   }
 }
